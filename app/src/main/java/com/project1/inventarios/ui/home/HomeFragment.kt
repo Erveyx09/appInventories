@@ -19,17 +19,21 @@ import com.project1.inventarios.databinding.FragmentHomeBinding
 import com.project1.inventarios.model.CardInventory
 import com.project1.inventarios.ui.home.adapter.InventoryListener
 import com.project1.inventarios.ui.home.adapter.RecyclerAdapter
+import com.project1.inventarios.utils.DialogFragments
+import com.project1.inventarios.utils.DialogListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), InventoryListener {
+class HomeFragment : Fragment(), InventoryListener,DialogListener {
 
     private var _binding: FragmentHomeBinding? = null
 
     private val homeViewModel:HomeViewModel by viewModels()
 
     lateinit var mRecyclerView : RecyclerView
+    lateinit var mDialogFragment: DialogFragments
+
     val mAdapter : RecyclerAdapter = RecyclerAdapter()
     private lateinit var searchText:EditText
 
@@ -84,7 +88,8 @@ class HomeFragment : Fragment(), InventoryListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mDialogFragment = DialogFragments()
+        mDialogFragment.setListener(this)
         homeViewModel.getAllCardInventories(null)
 
         homeViewModel.inventories.observe(viewLifecycleOwner){
@@ -122,7 +127,7 @@ class HomeFragment : Fragment(), InventoryListener {
 
     }
 
-    override fun onClick(quantity: Int?,id: Int?,type:Int) {
+    override fun onClick(quantity: Int?,id: Int?,type:Int,position:Int) {
         if (type==0){
             homeViewModel.putCardInventories(quantity!!, id!!)
         }else if (type==1){
@@ -130,7 +135,13 @@ class HomeFragment : Fragment(), InventoryListener {
             bundle.putInt("id", id!!)
             findNavController().navigate(R.id.action_nav_home_to_nav_gallery,bundle)
         }else{
-            homeViewModel.deleteCardInventories(id!!)
+            mDialogFragment.setIds(id!!,position)
+            mDialogFragment.show(parentFragmentManager,"Alerta")
         }
+    }
+
+    override fun onClickYes(int: Int,position: Int) {
+        homeViewModel.deleteCardInventories(int)
+        mAdapter.setDeleteInfo(position)
     }
 }

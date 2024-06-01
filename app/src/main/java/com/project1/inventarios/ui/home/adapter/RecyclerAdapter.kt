@@ -34,6 +34,13 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         this.notifyDataSetChanged()
     }
 
+    fun setDeleteInfo(layoutPosition:Int) {
+        inventoryRecyclerView?.remove(inventoryRecyclerView?.get(layoutPosition)!!)
+
+        Log.e("insertInventory catch",layoutPosition.toString())
+        notifyItemRemoved(layoutPosition)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(layoutInflater.inflate(R.layout.item_inventory, parent, false))
@@ -98,27 +105,24 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
                 inventoryListener.onClick(
                     sum,
                     inventoryRecyclerView?.get(layoutPosition)?.id,
-                    0
+                    0,
+                    layoutPosition
                 )
                 numberId.text = "0"
             } else if (p0?.id == editInventory.id) {
                 inventoryListener.onClick(
                     0,
                     inventoryRecyclerView?.get(layoutPosition)?.id,
-                    1
+                    1,
+                    layoutPosition
                 )
             } else if (p0?.id == deleteInventory.id) {
-
                 inventoryListener.onClick(
                     0,
                     inventoryRecyclerView?.get(layoutPosition)?.id,
-                    2
+                    2,
+                    layoutPosition
                 )
-
-                inventoryRecyclerView?.remove(inventoryRecyclerView?.get(layoutPosition)!!)
-
-                Log.e("insertInventory catch",layoutPosition.toString())
-                notifyItemRemoved(layoutPosition)
             }
 
         }
