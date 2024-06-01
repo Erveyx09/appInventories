@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_margin="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/medication"
+            android:scaleType="centerCrop" />
+        <TextView
+            android:id="@+id/serialNumberId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivAvatar"
+            android:layout_toEndOf="@+id/ivAvatar"
+            tools:text= "NS: 0123456789" />
+        <TextView
+            android:id="@+id/InventoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_below="@+id/serialNumberId"
+            android:layout_toRightOf="@+id/ivAvatar"
+            android:layout_toEndOf="@+id/ivAvatar"
+            tools:text = "Nombre: inventory"/>
+
+        <TextView
+            android:id="@+id/bottonOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:drawableStartCompat="@drawable/ok"
+            />
+
+
+        <TextView
+            android:id="@+id/quantityId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="20sp"
+            android:layout_below="@+id/InventoryName"
+            android:layout_toRightOf="@+id/ivAvatar"
+            android:layout_toEndOf="@+id/ivAvatar"
+            tools:text = "Cantidad: 300"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivAvatar"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/removeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:padding="5dp"
+                app:drawableStartCompat="@drawable/remove_inventory" />
+
+            <TextView
+                android:id="@+id/numberId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:textSize="30sp"
+                tools:text = "300"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/addId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:padding="5dp"
+                app:drawableRightCompat="@drawable/more_inventory" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
