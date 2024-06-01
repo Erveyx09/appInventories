@@ -18,7 +18,7 @@ class CardInventoryRepository(
             try {
                 dao.getAllQuantity()
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("getAllInventory catch",e.message.toString())
                 null
             }
         }
@@ -29,7 +29,7 @@ class CardInventoryRepository(
             try {
                 dao.getAllQuantityFromNameOrSerial(text)
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("getAllInventoryFromText catch",e.message.toString())
                 null
             }
         }
@@ -41,7 +41,18 @@ class CardInventoryRepository(
                 dao.updateInventory(quantity, id)
                 1
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("putInventory catch",e.message.toString())
+                0
+            }
+        }
+    }
+
+    suspend fun deleteInventory(id:Int): Int{
+        return withContext(Dispatchers.IO){
+            try {
+                dao.deleteInventory(id)
+            }catch (e: Exception){
+                Log.e("deleteInventory catch",e.message.toString())
                 0
             }
         }

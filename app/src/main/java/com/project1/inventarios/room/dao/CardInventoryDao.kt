@@ -15,4 +15,7 @@ interface CardInventoryDao {
 
     @Query("UPDATE inventory SET quantity = :quantity WHERE id =:id")
     suspend fun updateInventory(quantity:Int, id:Int): Int
+
+    @Query("DELETE FROM inventory WHERE id = :id")
+    suspend fun deleteInventory(id:Int): Int
 }

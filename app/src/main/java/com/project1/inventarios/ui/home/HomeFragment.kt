@@ -5,15 +5,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project1.inventarios.R
@@ -109,7 +107,7 @@ class HomeFragment : Fragment(), InventoryListener {
                 }
             }else{
                 //Toast.makeText(requireContext(),"Algo salio mal",Toast.LENGTH_LONG).show()
-                Log.e("inventoriesUpdate-->","salio algo mal")
+                //Log.e("inventoriesUpdate-->","salio algo mal")
             }
         }
     }
@@ -117,13 +115,22 @@ class HomeFragment : Fragment(), InventoryListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        searchText.setText("")
         homeViewModel.clear()
         homeViewModel.inventories.removeObservers(this)
         homeViewModel.inventoriesUpdate.removeObservers(this)
 
     }
 
-    override fun onClick(quantity: Int?,id: Int?) {
-        homeViewModel.putCardInventories(quantity!!, id!!)
+    override fun onClick(quantity: Int?,id: Int?,type:Int) {
+        if (type==0){
+            homeViewModel.putCardInventories(quantity!!, id!!)
+        }else if (type==1){
+            val bundle = Bundle()
+            bundle.putInt("id", id!!)
+            findNavController().navigate(R.id.action_nav_home_to_nav_gallery,bundle)
+        }else{
+            homeViewModel.deleteCardInventories(id!!)
+        }
     }
 }

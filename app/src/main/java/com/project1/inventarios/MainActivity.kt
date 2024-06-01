@@ -62,12 +62,6 @@ class MainActivity : AppCompatActivity() {
             R.id.createInventory -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
                 navController.navigate(R.id.nav_gallery)
-                /*val navController: NavController = Navigation.findNavController(
-                    this,
-                    R.id.nav_gallery
-                ) // replace "nav_host_fragment" with the id of your navHostFragment in activity layout
-
-                navController.navigate(R.id.nav_gallery)*/
                 true
             }
             else -> super.onOptionsItemSelected(item)

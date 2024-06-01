@@ -1,5 +1,5 @@
 package com.project1.inventarios.ui.home.adapter
 
 interface InventoryListener {
-    fun onClick(quantity:Int?,id:Int?)
+    fun onClick(quantity:Int?,id:Int?,type:Int)
 }

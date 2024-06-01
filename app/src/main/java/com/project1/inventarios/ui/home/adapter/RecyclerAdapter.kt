@@ -1,10 +1,13 @@
 package com.project1.inventarios.ui.home.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.project1.inventarios.R
 import com.project1.inventarios.model.CardInventory
@@ -26,7 +29,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         this.notifyDataSetChanged()
     }
 
-    fun setMutableInfo(inventoryRecyclerView: MutableList<CardInventory>?){
+    fun setMutableInfo(inventoryRecyclerView: MutableList<CardInventory>?) {
         this.inventoryRecyclerView = inventoryRecyclerView
         this.notifyDataSetChanged()
     }
@@ -54,10 +57,13 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         private val inventoryName = view.findViewById(R.id.InventoryName) as TextView
         private val quantityId = view.findViewById(R.id.quantityId) as TextView
         private val numberId = view.findViewById(R.id.numberId) as TextView
+        private val editInventory = view.findViewById(R.id.editInventory) as TextView
+
 
         private val bottonOk = view.findViewById(R.id.bottonOk) as TextView
         val removeId = view.findViewById(R.id.removeId) as TextView
         val addId = view.findViewById(R.id.addId) as TextView
+        val deleteInventory = view.findViewById(R.id.deleteInventory) as TextView
 
 
         fun bind(cardInventory: CardInventory?) {
@@ -66,6 +72,8 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
             quantityId.text = cardInventory?.quantity.toString()
             numberId.text = "0"
             bottonOk.setOnClickListener(this)
+            editInventory.setOnClickListener(this)
+            deleteInventory.setOnClickListener(this)
 
             removeId.setOnClickListener {
                 val quantity: String = numberId.text as String
@@ -82,16 +90,37 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         }
 
         override fun onClick(p0: View?) {
-            val quantity: String = numberId.text as String
-            val quantityF = quantity.toInt()
-            val sum = inventoryRecyclerView?.get(layoutPosition)?.quantity!!+quantityF
-            quantityId.text = sum.toString()
+            if (p0?.id == bottonOk.id) {
+                val quantity: String = numberId.text as String
+                val quantityF = quantity.toInt()
+                val sum = inventoryRecyclerView?.get(layoutPosition)?.quantity!! + quantityF
+                quantityId.text = sum.toString()
+                inventoryListener.onClick(
+                    sum,
+                    inventoryRecyclerView?.get(layoutPosition)?.id,
+                    0
+                )
+                numberId.text = "0"
+            } else if (p0?.id == editInventory.id) {
+                inventoryListener.onClick(
+                    0,
+                    inventoryRecyclerView?.get(layoutPosition)?.id,
+                    1
+                )
+            } else if (p0?.id == deleteInventory.id) {
 
-            inventoryListener.onClick(
-                sum,
-                inventoryRecyclerView?.get(layoutPosition)?.id
-            )
-            numberId.text = "0"
+                inventoryListener.onClick(
+                    0,
+                    inventoryRecyclerView?.get(layoutPosition)?.id,
+                    2
+                )
+
+                inventoryRecyclerView?.remove(inventoryRecyclerView?.get(layoutPosition)!!)
+
+                Log.e("insertInventory catch",layoutPosition.toString())
+                notifyItemRemoved(layoutPosition)
+            }
+
         }
     }
 

@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/delete.xml" value="0.152" />
+        <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/delete_inventory.xml" value="0.152" />
+        <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/edit.xml" value="0.148" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.1245" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/ic_baseline_medication_liquid_24.xml" value="0.1245" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.112" />
+        <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/ok.xml" value="0.148" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/remove_inventory.xml" value="0.1" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/drawable/side_nav_bar.xml" value="0.1475" />
         <entry key="..\:/Users/jdlib/OneDrive/Documentos/misProjectos/androidDir/Inventarios/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />

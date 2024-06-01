@@ -1,9 +1,6 @@
 package com.project1.inventarios.room.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.project1.inventarios.model.Inventory
 
 @Dao
@@ -18,7 +15,10 @@ interface InventoryDao {
     @Query("delete from inventory where id = :id")
     suspend fun deleteInventoryById(id:Int)
 
-    @Query("select * from inventory")
-    suspend fun getAll():List<Inventory>
+    @Query("select * from inventory where id = :id")
+    suspend fun getInventory(id:Int):Inventory
+
+    @Update
+    suspend fun putInventory(inventory:Inventory):Int
 
 }

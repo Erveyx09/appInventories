@@ -18,6 +18,10 @@ class GalleryViewModel  @Inject constructor(
     private val _inventories = MutableLiveData<Int?>()
     val inventories: LiveData<Int?> = _inventories
 
+
+    private val _inventoriesUpdate = MutableLiveData<Inventory?>()
+    val inventoriesUpdate: LiveData<Inventory?> = _inventoriesUpdate
+
     fun insertInventory(inventory: Inventory) = viewModelScope.launch {
         //_genres.postValue(Resource.Loading())
         try {
@@ -27,16 +31,26 @@ class GalleryViewModel  @Inject constructor(
         }
     }
 
-    /*fun updatedInventory(inventory: Inventory) = viewModelScope.launch {
+    fun getInventory(id: Int) = viewModelScope.launch {
         //_genres.postValue(Resource.Loading())
         try {
-            _inventories.postValue(inventoryRepository.insertInventory(inventory))
+            _inventoriesUpdate.postValue(inventoryRepository.getInventory(id))
         } catch (e:Exception){
             null
         }
-    }*/
+    }
+
+    fun updatedInventory(inventory: Inventory) = viewModelScope.launch {
+        //_genres.postValue(Resource.Loading())
+        try {
+            _inventories.postValue(inventoryRepository.updateInventory(inventory))
+        } catch (e:Exception){
+            null
+        }
+    }
 
     fun clear(){
         _inventories.value = null
+        _inventoriesUpdate.value = null
     }
 }

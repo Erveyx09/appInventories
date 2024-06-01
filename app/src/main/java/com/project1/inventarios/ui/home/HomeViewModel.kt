@@ -45,6 +45,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun deleteCardInventories(id:Int) = viewModelScope.launch {
+        try {
+            _inventoriesUpdate.postValue(cardInventoryRepository.deleteInventory(id))
+        } catch (e:Exception){
+            null
+        }
+    }
+
     fun clear(){
         _inventories.value = null
         _inventoriesUpdate.value = null

@@ -35,9 +35,7 @@ class GalleryFragment : Fragment() {
     private lateinit var editTextNumberSerial:EditText
     private lateinit var editTextQuantity:EditText
     private lateinit var description:EditText
-
-
-
+    private var idInventory:Int? = 0
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -56,6 +54,7 @@ class GalleryFragment : Fragment() {
     }
 
     fun init() {
+
         val button = _binding!!.root.findViewById<Button>(R.id.buttonAccept)
 
         editTextname = _binding!!.root.findViewById(R.id.EditTextName)
@@ -71,15 +70,28 @@ class GalleryFragment : Fragment() {
             val desc = description.text.toString()
 
             if (name.isNotEmpty() && numberSerial.isNotEmpty() && desc.isNotEmpty()){
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-                val current = LocalDateTime.now().format(formatter)
-                val inventory = Inventory(
-                    null,
-                    name = name,
-                    quantity.toInt(),
-                    desc, "todos", serialNumber = numberSerial, current
-                )
-                galleryViewModel.insertInventory(inventory)
+                if (idInventory!=null){
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                    val current = LocalDateTime.now().format(formatter)
+                    val inventory = Inventory(
+                        idInventory,
+                        name = name,
+                        quantity.toInt(),
+                        desc, "todos", serialNumber = numberSerial, current
+                    )
+                    galleryViewModel.insertInventory(inventory)
+                }else{
+
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                    val current = LocalDateTime.now().format(formatter)
+                    val inventory = Inventory(
+                        null,
+                        name = name,
+                        quantity.toInt(),
+                        desc, "todos", serialNumber = numberSerial, current
+                    )
+                    galleryViewModel.insertInventory(inventory)
+                }
             }else{
                 Toast.makeText(requireContext(),"Faltan datos por llenar",Toast.LENGTH_LONG).show()
             }
@@ -92,6 +104,25 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        idInventory = arguments?.getInt("id")
+
+        if (idInventory!=null){
+
+            galleryViewModel.inventoriesUpdate.observe(viewLifecycleOwner) {
+                    inventory ->
+                if (inventory!=null){
+                    editTextname.setText(inventory.name)
+                    editTextNumberSerial.setText(inventory.serialNumber)
+                    editTextQuantity.setText(inventory.quantity.toString())
+                    description.setText(inventory.description)
+                }else{
+                    Log.e("catch","sin informacion")
+                }
+            }
+
+            galleryViewModel.getInventory(idInventory!!)
+        }
+
         galleryViewModel.inventories.observe(viewLifecycleOwner) { inventories ->
             if (inventories != null) {
                 if (inventories>0){
@@ -100,7 +131,7 @@ class GalleryFragment : Fragment() {
                     editTextname.editableText.clear()
                     editTextQuantity.setText("0")
                     description.editableText.clear()
-                    Toast.makeText(requireContext(),"Dato creado",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(requireContext(),"Dato creado",Toast.LENGTH_LONG).show()
                 }
                 val navController = findNavController()
                 navController.navigateUp()
