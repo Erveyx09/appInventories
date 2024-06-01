@@ -36,6 +36,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+
     fun putCardInventories(quantity:Int, id:Int) = viewModelScope.launch {
         try {
             _inventoriesUpdate.postValue(cardInventoryRepository.putInventory(quantity, id))
