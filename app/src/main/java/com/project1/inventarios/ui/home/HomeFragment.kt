@@ -127,9 +127,9 @@ class HomeFragment : Fragment(), InventoryListener,DialogListener {
 
     }
 
-    override fun onClick(quantity: Int?,id: Int?,type:Int,position:Int) {
+    override fun onClick(id: Int?,representation:Int, quantity:Int,type:Int,position:Int) {
         if (type==0){
-            homeViewModel.putCardInventories(quantity!!, id!!)
+            homeViewModel.putCardInventories(id!!,representation,quantity)
         }else if (type==1){
             val bundle = Bundle()
             bundle.putInt("id", id!!)

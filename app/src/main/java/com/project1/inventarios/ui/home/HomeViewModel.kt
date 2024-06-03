@@ -37,9 +37,9 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun putCardInventories(quantity:Int, id:Int) = viewModelScope.launch {
+    fun putCardInventories(id:Int,representation:Int, quantity:Int) = viewModelScope.launch {
         try {
-            _inventoriesUpdate.postValue(cardInventoryRepository.putInventory(quantity, id))
+            _inventoriesUpdate.postValue(cardInventoryRepository.putInventory(id,representation, quantity))
         } catch (e:Exception){
             null
         }

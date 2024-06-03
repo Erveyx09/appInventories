@@ -18,14 +18,7 @@ class SlideshowViewModel @Inject constructor(
     private val _inventories = MutableLiveData<Int?>()
     val inventories: LiveData<Int?> = _inventories
 
-    fun putCardInventories(quantity:Int, id:Int) = viewModelScope.launch {
-        //_genres.postValue(Resource.Loading())
-        try {
-            _inventories.postValue(cardInventoryRepository.putInventory(quantity, id))
-        } catch (e:Exception){
-            null
-        }
-    }
+
 
     fun clear(){
         _inventories.value = null

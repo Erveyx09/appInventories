@@ -2,9 +2,7 @@ package com.project1.inventarios.repository
 
 import android.util.Log
 import com.project1.inventarios.model.CardInventory
-import com.project1.inventarios.model.Inventory
 import com.project1.inventarios.room.dao.CardInventoryDao
-import com.project1.inventarios.room.dao.InventoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -35,11 +33,10 @@ class CardInventoryRepository(
         }
     }
 
-    suspend fun putInventory(quantity:Int, id:Int): Int{
+    suspend fun putInventory(id:Int,representation:Int, quantity:Int): Int{
         return withContext(Dispatchers.IO){
             try {
-                dao.updateInventory(quantity, id)
-                1
+                dao.updateInventory(id, representation,quantity)
             }catch (e: Exception){
                 Log.e("putInventory catch",e.message.toString())
                 0

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.project1.inventarios.model.Inventory
 import com.project1.inventarios.room.dao.CardInventoryDao
 import com.project1.inventarios.room.dao.InventoryDao
@@ -11,7 +12,8 @@ import com.project1.inventarios.utils.Constants.NAME_DATABASE
 
 @Database(entities = arrayOf(
    Inventory::class
-),version = 4)
+),version = 5)
+@TypeConverters(TypeConverter::class)
 abstract class AppRoomDataBase: RoomDatabase() {
     companion object{
         private var appRoomDataBase:AppRoomDataBase? = null
