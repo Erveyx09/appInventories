@@ -149,7 +149,10 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
                 val sumQuantity = refFinal*equivalence
 
                 val sum = inventoryRecyclerView?.get(layoutPosition)?.quantity!! + quantityF+sumQuantity
+
+                inventoryRecyclerView?.get(layoutPosition)?.quantity = sum
                 val sumReference = Math.ceil(sum.toDouble()/equivalence).toInt()
+                inventoryRecyclerView?.get(layoutPosition)?.representation = sumReference
 
                 ref.setText(equivalencesName+":"+sumReference.toString())
                 equ.setText(representationName+":"+sum.toString())
@@ -162,6 +165,9 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
                     layoutPosition
                 )
                 numberId.text = "0"
+                numberId2.text = "0"
+                notifyItemChanged(layoutPosition)
+
             } else if (p0?.id == editInventory.id) {
                 inventoryListener.onClick(
                     inventoryRecyclerView?.get(layoutPosition)?.id,

@@ -7,10 +7,10 @@ data class CardInventory(
     var id:Int?,
     val noReference:String,
     var name:String,
-    val representation:Int,
+    var representation:Int,
     val representationName:String,
     val equivalences:Int,
     val equivalencesName:String,
-    val quantity:Int,
+    var quantity:Int,
     val deliveryBy:String
     ): Serializable

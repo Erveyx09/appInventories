@@ -32,15 +32,14 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/medication"
-                />
+                android:src="@drawable/medication" />
 
             <TextView
                 android:id="@+id/InventoryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/img"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="10dp"
                 android:text="MMMMMMMMMMMMMMMMMM"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -50,9 +49,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/InventoryName"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/img"
                 android:text="MMMMMMMMMMMMMM"
-                android:layout_marginLeft="5dp"
 
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -62,10 +61,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_toEndOf="@+id/img"
                 android:text="REF:300"
-                android:layout_marginLeft="5dp"
                 android:textSize="20sp"
+
                 android:textStyle="bold" />
 
 
@@ -78,6 +79,7 @@
                 android:layout_toEndOf="@id/quantity"
                 android:text="EQU:300"
                 android:textSize="20sp"
+                android:layout_marginBottom="10dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

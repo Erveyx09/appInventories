@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:hint="cantidad" />
+                android:hint="cantidad total" />
 
             <EditText
                 android:id="@+id/representationQualityNameId"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:ems="10"
-                android:hint="representacion" />
+                android:hint="equivalencia" />
         </LinearLayout>
 
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:ems="10"
-                android:hint="equivalencia" />
+                android:hint="representacion" />
         </LinearLayout>
 
 
