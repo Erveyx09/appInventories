@@ -17,7 +17,6 @@ data class Inventory (
     val equivalences:Int,
     val equivalencesName:String,
     val quantity:Int,
-
     val expires:Date?,
     val portion:String,
     val equipment:String,

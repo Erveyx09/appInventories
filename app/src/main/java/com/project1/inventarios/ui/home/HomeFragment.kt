@@ -1,5 +1,6 @@
 package com.project1.inventarios.ui.home
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,11 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project1.inventarios.R
 import com.project1.inventarios.databinding.FragmentHomeBinding
 import com.project1.inventarios.model.CardInventory
+import com.project1.inventarios.model.History
 import com.project1.inventarios.ui.home.adapter.InventoryListener
 import com.project1.inventarios.ui.home.adapter.RecyclerAdapter
 import com.project1.inventarios.utils.DialogFragments
 import com.project1.inventarios.utils.DialogListener
 import dagger.hilt.android.AndroidEntryPoint
+import java.sql.Date
+import java.sql.Timestamp
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @AndroidEntryPoint
@@ -36,6 +42,9 @@ class HomeFragment : Fragment(), InventoryListener,DialogListener {
 
     val mAdapter : RecyclerAdapter = RecyclerAdapter()
     private lateinit var searchText:EditText
+
+    private val calendar = Calendar.getInstance()
+
 
     var inventoryMutable: MutableList<CardInventory>? = ArrayList()
 
@@ -127,15 +136,31 @@ class HomeFragment : Fragment(), InventoryListener,DialogListener {
 
     }
 
-    override fun onClick(id: Int?,representation:Int, quantity:Int,type:Int,position:Int) {
+    override fun onClick(cardInventory: CardInventory,note:String,type:Int,position:Int) {
         if (type==0){
-            homeViewModel.putCardInventories(id!!,representation,quantity)
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")
+            val current = LocalDateTime.now().format(formatter)
+
+            val StringDate = calendar.get(Calendar.YEAR).toString()+"-"+calendar.get(Calendar.MONTH).toString()+"-"+calendar.get(Calendar.DAY_OF_MONTH).toString()
+
+
+            Log.e("MMMMMMMMMMMM=========>>",StringDate)
+            val history:History = History(
+                null,
+                note,
+                cardInventory.name,
+                cardInventory.noReference,
+                Date.valueOf(StringDate),
+                Timestamp.valueOf(current)
+            )
+
+            homeViewModel.putCardInventories(cardInventory.id!!,cardInventory.representation,cardInventory.quantity,history)
         }else if (type==1){
             val bundle = Bundle()
-            bundle.putInt("id", id!!)
+            bundle.putInt("id", cardInventory.id!!)
             findNavController().navigate(R.id.action_nav_home_to_nav_gallery,bundle)
         }else{
-            mDialogFragment.setIds(id!!,position)
+            mDialogFragment.setIds(cardInventory.id!!,position)
             mDialogFragment.show(parentFragmentManager,"Alerta")
         }
     }

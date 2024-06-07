@@ -5,14 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.project1.inventarios.model.History
 import com.project1.inventarios.model.Inventory
 import com.project1.inventarios.room.dao.CardInventoryDao
+import com.project1.inventarios.room.dao.HistoryDao
 import com.project1.inventarios.room.dao.InventoryDao
 import com.project1.inventarios.utils.Constants.NAME_DATABASE
 
 @Database(entities = arrayOf(
-   Inventory::class
-),version = 5)
+   Inventory::class, History::class
+),version = 6)
 @TypeConverters(TypeConverter::class)
 abstract class AppRoomDataBase: RoomDatabase() {
     companion object{
@@ -31,5 +33,7 @@ abstract class AppRoomDataBase: RoomDatabase() {
 
     abstract fun getInventoriesDao():InventoryDao
     abstract fun getCardInventoriesDao():CardInventoryDao
+    abstract fun getHistoryDao():HistoryDao
+
 
 }

@@ -2,13 +2,15 @@ package com.project1.inventarios.repository
 
 import android.util.Log
 import com.project1.inventarios.model.CardInventory
+import com.project1.inventarios.model.History
 import com.project1.inventarios.room.dao.CardInventoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class CardInventoryRepository(
-    private val dao: CardInventoryDao
+    private val dao: CardInventoryDao,
+    private val daoHistory: HistoryRepository
 ) {
 
     suspend fun getAllInventory(): List<CardInventory>?{
@@ -33,9 +35,10 @@ class CardInventoryRepository(
         }
     }
 
-    suspend fun putInventory(id:Int,representation:Int, quantity:Int): Int{
+    suspend fun putInventory(id:Int,representation:Int, quantity:Int,history: History): Int{
         return withContext(Dispatchers.IO){
             try {
+                daoHistory.createHistory(history)
                 dao.updateInventory(id, representation,quantity)
             }catch (e: Exception){
                 Log.e("putInventory catch",e.message.toString())

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project1.inventarios.model.CardInventory
+import com.project1.inventarios.model.History
 import com.project1.inventarios.model.Inventory
 import com.project1.inventarios.repository.CardInventoryRepository
 import com.project1.inventarios.repository.InventoryRepository
@@ -37,9 +38,9 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun putCardInventories(id:Int,representation:Int, quantity:Int) = viewModelScope.launch {
+    fun putCardInventories(id:Int,representation:Int, quantity:Int,history: History) = viewModelScope.launch {
         try {
-            _inventoriesUpdate.postValue(cardInventoryRepository.putInventory(id,representation, quantity))
+            _inventoriesUpdate.postValue(cardInventoryRepository.putInventory(id,representation, quantity,history))
         } catch (e:Exception){
             null
         }

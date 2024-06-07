@@ -158,29 +158,30 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
                 equ.setText(representationName+":"+sum.toString())
 
                 inventoryListener.onClick(
-                    inventoryRecyclerView?.get(layoutPosition)?.id,
-                    sumReference,
-                    sum,
+                    inventoryRecyclerView?.get(layoutPosition)!!,
+                    notaText.text.toString(),
                     0,
                     layoutPosition
                 )
                 numberId.text = "0"
                 numberId2.text = "0"
+                notaText.setText("")
+
                 notifyItemChanged(layoutPosition)
 
             } else if (p0?.id == editInventory.id) {
                 inventoryListener.onClick(
-                    inventoryRecyclerView?.get(layoutPosition)?.id,
-                    0,
-                    0,
+                    inventoryRecyclerView?.get(layoutPosition)!!,
+                    "",
                     1,
                     layoutPosition
                 )
+
+                notaText.setText("")
             } else if (p0?.id == deleteInventory.id) {
                 inventoryListener.onClick(
-                    inventoryRecyclerView?.get(layoutPosition)?.id,
-                    0,
-                    0,
+                    inventoryRecyclerView?.get(layoutPosition)!!,
+                    "",
                     2,
                     layoutPosition
                 )

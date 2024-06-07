@@ -1,5 +1,7 @@
 package com.project1.inventarios.ui.home.adapter
 
+import com.project1.inventarios.model.CardInventory
+
 interface InventoryListener {
-    fun onClick(id:Int?,representation:Int, quantity:Int,type:Int,position:Int)
+    fun onClick(cardInventory: CardInventory,note:String,type:Int,position:Int)
 }
