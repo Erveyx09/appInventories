@@ -11,25 +11,36 @@ class InventoryRepository(
     private val dao: InventoryDao
 ) {
 
-    suspend fun getAllInventory(): List<Inventory>?{
-        return withContext(Dispatchers.IO){
-            try {
-                dao.getAll()
-            }catch (e: Exception){
-                Log.e("catch",e.message.toString())
-                null
-            }
-        }
-    }
-
     suspend fun insertInventory(inventory:Inventory): Int{
         return withContext(Dispatchers.IO){
             try {
                 dao.insertInventories(inventory)
                 1
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("insertInventory catch",e.message.toString())
                 0
+            }
+        }
+    }
+
+    suspend fun updateInventory(inventory:Inventory): Int{
+        return withContext(Dispatchers.IO){
+            try {
+                dao.putInventory(inventory)
+            }catch (e: Exception){
+                Log.e("updateInventory catch",e.message.toString())
+                0
+            }
+        }
+    }
+
+    suspend fun getInventory(id:Int): Inventory?{
+        return withContext(Dispatchers.IO){
+            try {
+                dao.getInventory(id)
+            }catch (e: Exception){
+                Log.e("getInventory catch ",e.message.toString())
+                null
             }
         }
     }

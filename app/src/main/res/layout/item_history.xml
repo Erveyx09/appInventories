@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="3dp"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/dateId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:hint="2024-01-01"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/nameProductId"
+            android:layout_marginTop="25dp"
+            android:textSize="25dp"
+            android:hint="Nombre: popo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/noReferenceId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameProductId"
+            android:layout_marginTop="25dp"
+            android:hint="No. Referencia: popo"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/noteId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noReferenceId"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Se le dio informacion a alguien"
+            android:maxLines="3"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

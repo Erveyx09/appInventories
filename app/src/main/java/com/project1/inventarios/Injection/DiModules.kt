@@ -2,9 +2,11 @@ package com.project1.inventarios.Injection
 
 import android.content.Context
 import com.project1.inventarios.repository.CardInventoryRepository
+import com.project1.inventarios.repository.HistoryRepository
 import com.project1.inventarios.repository.InventoryRepository
 import com.project1.inventarios.room.AppRoomDataBase
 import com.project1.inventarios.room.dao.CardInventoryDao
+import com.project1.inventarios.room.dao.HistoryDao
 import com.project1.inventarios.room.dao.InventoryDao
 import dagger.Module
 import dagger.Provides
@@ -42,6 +44,12 @@ object DiModules {
         return appRoomDataBase.getCardInventoriesDao()
     }
 
+    @Singleton
+    @Provides
+    fun provideHistoryDao(appRoomDataBase: AppRoomDataBase):HistoryDao{
+        return appRoomDataBase.getHistoryDao()
+    }
+
 
     @Singleton
     @Provides
@@ -53,8 +61,17 @@ object DiModules {
 
     @Singleton
     @Provides
-    fun provideCardInventoryRepository(dao:CardInventoryDao):CardInventoryRepository{
+    fun provideCardInventoryRepository(dao:CardInventoryDao,daoHistory: HistoryRepository,):CardInventoryRepository{
         return CardInventoryRepository(
+            dao = dao,
+            daoHistory = daoHistory
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideHistoryRepository(dao:HistoryDao):HistoryRepository{
+        return HistoryRepository(
             dao = dao
         )
     }

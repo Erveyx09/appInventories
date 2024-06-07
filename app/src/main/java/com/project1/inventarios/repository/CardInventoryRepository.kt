@@ -2,15 +2,15 @@ package com.project1.inventarios.repository
 
 import android.util.Log
 import com.project1.inventarios.model.CardInventory
-import com.project1.inventarios.model.Inventory
+import com.project1.inventarios.model.History
 import com.project1.inventarios.room.dao.CardInventoryDao
-import com.project1.inventarios.room.dao.InventoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class CardInventoryRepository(
-    private val dao: CardInventoryDao
+    private val dao: CardInventoryDao,
+    private val daoHistory: HistoryRepository
 ) {
 
     suspend fun getAllInventory(): List<CardInventory>?{
@@ -18,7 +18,7 @@ class CardInventoryRepository(
             try {
                 dao.getAllQuantity()
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("getAllInventory catch",e.message.toString())
                 null
             }
         }
@@ -29,19 +29,30 @@ class CardInventoryRepository(
             try {
                 dao.getAllQuantityFromNameOrSerial(text)
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("getAllInventoryFromText catch",e.message.toString())
                 null
             }
         }
     }
 
-    suspend fun putInventory(quantity:Int, id:Int): Int{
+    suspend fun putInventory(id:Int,representation:Int, quantity:Int,history: History): Int{
         return withContext(Dispatchers.IO){
             try {
-                dao.updateInventory(quantity, id)
-                1
+                daoHistory.createHistory(history)
+                dao.updateInventory(id, representation,quantity)
             }catch (e: Exception){
-                Log.e("catch",e.message.toString())
+                Log.e("putInventory catch",e.message.toString())
+                0
+            }
+        }
+    }
+
+    suspend fun deleteInventory(id:Int): Int{
+        return withContext(Dispatchers.IO){
+            try {
+                dao.deleteInventory(id)
+            }catch (e: Exception){
+                Log.e("deleteInventory catch",e.message.toString())
                 0
             }
         }
